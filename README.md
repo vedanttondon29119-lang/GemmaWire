@@ -90,4 +90,26 @@ The model is the core **sketch-to-UI compiler**. It:
 [ Output Sanitizer ] ◄───(Raw model output)─── [ Local Gemma 4 via Ollama ]
 ```
 
+## 11. Component-Level Architecture
+*   **Frontend:** Vanilla HTML/JS/CSS, no Node or bundler. Tailwind's browser build is **bundled locally** and served by the backend, so preview works offline.
+*   **Backend (FastAPI, Python 3.11):** Multipart upload handling, file type and size validation, Base64 conversion, timeouts and error responses.
+*   **Inference layer:** Python `requests` calls to the local Ollama HTTP API.
+
+## 12. Data / Information Flow
+1. **Ingestion:** User uploads an image in the browser.
+2. **Transport:** Frontend posts the file via `FormData` to `/api/generate`.
+3. **Validation & encoding:** Backend checks type/size and Base64-encodes the bytes.
+4. **Prompting:** A payload with a strict system prompt (low temperature, e.g. `0.1`) and the image goes to the local Gemma 4 server.
+5. **Sanitization:** Backend extracts the content from `<!DOCTYPE html>` to `</html>`. If the closing tag is missing (truncated output), it falls back to extracting the first complete HTML block, and if that also fails it returns a clear error with a retry option._(Thank you! for reading till now >:D . Theres not much left)_
+6. **Delivery:** Clean HTML is returned and rendered in the preview iframe.
+
+## 13. Agentic Workflow
+The MVP uses a single-turn, deterministic pipeline to keep latency low and behavior predictable. Reflection loops are intentionally left out of the MVP and listed under future scope.
+
+## 14. Technology Stack
+*   **Frontend:** HTML5, CSS3, ES6 JavaScript
+*   **Backend:** Python 3.11, FastAPI, Uvicorn, Pydantic, python-multipart
+*   **AI infrastructure:** Gemma 4, Ollama / llama.cpp
+*   **Output styling:** Tailwind CSS (bundled locally)
+
 
