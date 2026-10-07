@@ -41,3 +41,13 @@ Sketch/screenshot-to-code tools already exist, and GemmaWire does not claim to b
 
 **Why this matters:** teams in enterprise, finance, healthcare and government often cannot upload unreleased designs to outside servers. GemmaWire lets them use multimodal AI for scaffolding without that trade-off.
 
+## 3. Project Overview
+GemmaWire is a local-first multimodal web app. A user uploads a photo of a hand-drawn wireframe; a locally hosted, quantized Gemma 4 vision-language model reads the layout and handwriting and produces semantic HTML with Tailwind CSS utility classes. The result is shown in a live preview next to the raw code, ready to copy.
+
+## 4. Proposed Solution
+A lightweight, build-step-free web application with a local AI pipeline:
+1. The user uploads an image in a vanilla HTML5 interface.
+2. A Python FastAPI backend validates and Base64-encodes the image and sends it to a local Gemma 4 model served by Ollama.
+3. The backend sanitizes the model output (strips markdown fences and conversational filler) and returns clean HTML.
+4. The frontend renders it in a sandboxed iframe and shows the code in an inspector pane.
+
