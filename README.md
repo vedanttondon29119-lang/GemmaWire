@@ -132,4 +132,21 @@ We will measure the system on a small set of sketches covering common layouts (l
 *   **Text accuracy:** how well handwritten labels are transcribed.
 *   **Latency and memory use:** measured on our own hardware and reported in the final submission.
 
+## 18. Scope & Limitations
+GemmaWire produces a **starting scaffold**, not pixel-perfect production code. Very messy handwriting, overlapping shapes or ambiguous diagrams may need manual fixes. Interactivity and backend logic are out of scope for the MVP.
+
+## 19. Expected Final Output
+A working, responsive web dashboard where evaluators can upload a sketch photo, watch the local Gemma 4 model process it, and interact with the generated UI.
+
+## 20. Expected Impact
+*   **Time saved:** replaces hours of manual scaffolding with a single upload.
+*   **Privacy:** proprietary designs never leave the developer's machine.
+*   **Accessibility:** no paid APIs, so students and small teams can use it.
+*   **Open-source value:** a reproducible pattern for practical local multimodal tools.
+
+## 21. Future Scope
+*   **Multi-framework export:** React (JSX/TSX), Vue, Flutter.
+*   **Interactive refinement:** chat-based edits (e.g., *"Make the navbar dark-themed"*), including an optional self-review loop.
+*   **Easy local deployment:** Docker packaging of the API and inference runtime.
+*   **Design-token support:** apply a team's colors and spacing to generated output.
 
