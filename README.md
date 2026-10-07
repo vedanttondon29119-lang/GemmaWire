@@ -51,3 +51,13 @@ A lightweight, build-step-free web application with a local AI pipeline:
 3. The backend sanitizes the model output (strips markdown fences and conversational filler) and returns clean HTML.
 4. The frontend renders it in a sandboxed iframe and shows the code in an inspector pane.
 
+## 5. Objectives
+*   **Meaningful multimodal use:** Use Gemma 4's vision capability to read spatial layout and handwriting directly, with no separate OCR step.
+*   **Hardware feasibility:** Show that useful UI generation can run fully locally on consumer-grade hardware using a quantized model.
+*   **Developer speed:** Turn a photographed sketch into a working scaffold in one step instead of hours of manual markup.
+*   **Privacy by design:** No network calls to external AI services at any point.
+
+## 6. Target Users / Use Case
+*   **Primary users:** UI/UX designers, product managers, and frontend engineers, especially on privacy-sensitive teams.
+*   **Use case:** After a sprint planning session, a developer photographs the whiteboard, uploads it to GemmaWire, and gets a responsive Tailwind scaffold to start a new feature branch.
+
