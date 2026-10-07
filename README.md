@@ -112,4 +112,24 @@ The MVP uses a single-turn, deterministic pipeline to keep latency low and behav
 *   **AI infrastructure:** Gemma 4, Ollama / llama.cpp
 *   **Output styling:** Tailwind CSS (bundled locally)
 
+## 15. Expected Features
+*   **Whiteboard parsing:** Handles low-fidelity inputs (pencil, dry-erase markers, phone photos).
+*   **Output sanitization:** Strips filler text and wrappers so output renders reliably.
+*   **Dual-pane workspace:** Sandboxed live preview beside a raw code inspector.
+*   **One-click copy/export:** Clipboard copy and HTML download.
+*   **Offline operation:** No external network dependency once the model is installed.
+
+## 16. Implementation Approach
+1. **Phase 1, environment & AI:** Set up local Gemma 4 and tune the system prompt with cURL tests on sample sketches.
+2. **Phase 2, backend:** Wrap inference in FastAPI; build validation and the sanitizer with fallbacks.
+3. **Phase 3, frontend:** Build the dropzone, preview iframe, code pane and export.
+4. **Phase 4, evaluation & polish:** Test across lighting, handwriting and layout types; fix failure cases.
+
+## 17. Evaluation Plan
+We will measure the system on a small set of sketches covering common layouts (landing page, dashboard, login form, card grid, navbar + sidebar):
+*   **Render success rate:** share of outputs that produce valid, renderable HTML.
+*   **Layout fidelity:** whether major regions (header, sidebar, columns, buttons) match the sketch, checked manually.
+*   **Text accuracy:** how well handwritten labels are transcribed.
+*   **Latency and memory use:** measured on our own hardware and reported in the final submission.
+
 
