@@ -150,3 +150,18 @@ A working, responsive web dashboard where evaluators can upload a sketch photo, 
 *   **Easy local deployment:** Docker packaging of the API and inference runtime.
 *   **Design-token support:** apply a team's colors and spacing to generated output.
 
+## 22. Open-Source Dependencies / Components
+*   `fastapi`, `uvicorn`, `python-multipart`, `pydantic`, `requests`
+*   Ollama / llama.cpp (local inference)
+*   Gemma 4 (open-weight model)
+*   Tailwind CSS
+
+## 23. Expected Challenges and Mitigation
+*   **GPU memory limits.** Local multimodal models can run out of memory on consumer GPUs.
+    *   *Mitigation:* use a 4-bit quantized Gemma 4 variant and downscale uploaded images before inference.
+*   **Conversational or truncated output breaking rendering.**
+    *   *Mitigation:* strict prompt contract plus the backend sanitizer with fallbacks and clear error handling.
+*   **Untrusted generated HTML.**
+    *   *Mitigation:* render only inside a sandboxed iframe (`sandbox` attribute, no same-origin access).
+*   **Inconsistent output across sketches.**
+    *   *Mitigation:* low temperature, a fixed prompt template, and tuning against our evaluation set.
