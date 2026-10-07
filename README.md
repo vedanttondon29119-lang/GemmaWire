@@ -61,3 +61,33 @@ A lightweight, build-step-free web application with a local AI pipeline:
 *   **Primary users:** UI/UX designers, product managers, and frontend engineers, especially on privacy-sensitive teams.
 *   **Use case:** After a sprint planning session, a developer photographs the whiteboard, uploads it to GemmaWire, and gets a responsive Tailwind scaffold to start a new feature branch.
 
+## 7. Open-Source AI Technology Selected
+*   **Model:** Gemma 4 (vision-capable variant)
+*   **Configuration:** 4-bit quantized GGUF for edge deployment
+*   **Inference engine:** Ollama / llama.cpp, running locally
+
+## 8. Why This Technology Was Selected
+Gemma 4 processes text and images in one model, so it can relate boxes, nesting and handwritten labels without a fragile separate OCR pipeline. Being open-weight, it can run fully on the user's own machine, which is what makes the privacy guarantee possible. Its small, quantizable variants make consumer-hardware deployment realistic.
+
+## 9. AI's Role in the System
+The model is the core **sketch-to-UI compiler**. It:
+1. Identifies containers, rows, columns, buttons, inputs and other components from the sketch.
+2. Transcribes handwritten text into UI copy.
+3. Emits Tailwind utility classes (`flex`, `grid`, `p-4`, `rounded-lg`) that reproduce the sketched structure.
+
+## 10. System Architecture
+
+```
+[ User / Developer ]
+       │ (Uploads JPEG/PNG)
+       ▼
+[ Vanilla JS Frontend ] ───(Multipart Form POST)───┐
+       ▲                                           │
+       │ (Live render via sandboxed iframe)        ▼
+       │                                 [ FastAPI Gateway ]
+       │                                           │ (Validate + Base64 encode)
+       │                                           ▼
+[ Output Sanitizer ] ◄───(Raw model output)─── [ Local Gemma 4 via Ollama ]
+```
+
+
